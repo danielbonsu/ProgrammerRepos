@@ -1,12 +1,17 @@
-import React, { useEffect,useState } from "react";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import { FaUserAlt } from "react-icons/fa";
+import React, { useEffect,useState, useContext } from "react";
+import ProgrammersContext from "../../context/ProgrammersReposContext";
+
+
 import "./Header.scss";
 
 const Header = () => {
 
+ const {programmers, searchProgrammer} =  useContext(ProgrammersContext)
+ console.log(programmers, 7777)
  const [searchText, setSearchText] =  useState('') 
+ useEffect( () => {
+    searchProgrammer(searchText)
+ }, [searchText])
   return (
     <div className="header">
       <div className="content">
@@ -16,7 +21,7 @@ const Header = () => {
           className="formControl"
           placeholder="Find A User"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={e => setSearchText(() => e.target.value)}
         />
       </div>
     </div>

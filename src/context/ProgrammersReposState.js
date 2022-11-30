@@ -2,11 +2,17 @@ import ProgrammersContext from "./ProgrammersReposContext";
 import { useReducer } from "react";
 import {ProgrammersReposReducer} from "./ProgrammersReposReducer"
 import axios from "axios";
+import { api } from "../components/api/GitHubAPI";
+import { ActionTypes } from "./ActionTypes";
+
+
+
 
 
 const ProgrammerReposState = ({children}) => {
     const initialState = {
-        programmers: [],
+        allProgrammers: [],
+        filteredProgrammers: [],
         repos: [],
         loading: false
     }
@@ -16,14 +22,50 @@ const ProgrammerReposState = ({children}) => {
 
     // actions
     
+
+    // filter users
     const searchProgrammer = async searchText => {
-        const apiRes =  await axios.get(`https://api.github.com/search/users?q=${searchText}`)
-        console.log(apiRes.data.items, 'aaaaa')
+       
+        try {
+            const apiRes = await api(searchText)
+
+            dispatch({
+                type: ActionTypes.setFilteredProgrammers,
+               
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
+
+    
+        
+
+    }
+
+
+    // get all programmers
+    
+    const getAllProgrammers =  async () => {
+        
+        const apiRes =  await api()
+        const getProgrammersFullDetails = apiRes && apiRes.map(async user => {
+            return  await api(`/users/${user.login}`)
+            
+        })
+
+        const fullProgrammersFullDetailsFin = await Promise.all(getProgrammersFullDetails)
+    
+        dispatch({
+            type: ActionTypes.allProgrammers,
+            payload: fullProgrammersFullDetailsFin
+        })
     }
 
     return <ProgrammersContext.Provider value={{
-       programmers: state.programmers,
-       searchProgrammer
+       allProgrammers: state.allProgrammers,
+       filteredProgrammers:state.filteredProgrammers,
+       searchProgrammer,
+       getAllProgrammers
     }}>
         {children}
     </ProgrammersContext.Provider>

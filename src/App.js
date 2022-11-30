@@ -1,16 +1,18 @@
 import NavbarComponent from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import ProgrammerReposState from "./context/ProgrammersReposState";
+import UsersDisplayContainer from "./components/UserUI/container/UsersDisplayContainer";
 
 import "./App.css";
-import { Nav } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 
-function App() {
+const  App = () => {
   return (
     <div className="App">
       <ProgrammerReposState>
         <NavbarComponent />
         <Header />
+        <UsersDisplayContainer />
       </ProgrammerReposState>
     </div>
   );

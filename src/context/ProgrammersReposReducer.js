@@ -1,10 +1,20 @@
 import { ActionTypes } from "./ActionTypes";
 export const ProgrammersReposReducer = (state, action) => {
   switch (action.type) {
-    case ActionTypes.searchProgrammer:
+    case ActionTypes.allProgrammers:
       return {
         ...state,
-        programmers: action.payload,
+        allProgrammers: action.payload,
+      };
+
+    case ActionTypes.setFilteredProgrammers:
+      return {
+        ...state,
+        filteredProgrammers: state.allProgrammers.filter(
+          (programmer) =>
+            programmer.login.includes(action.payload) ||
+            programmer.email.includes(action.payload)
+        ),
       };
 
     case ActionTypes.setLoading:

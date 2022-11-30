@@ -1,4 +1,5 @@
 export const ActionTypes = {
-    searchProgrammer: "searchProgrammer",
+    setProgrammers: "setProgrammers",
+    setFilteredProgrammers: "setFilteredProgrammers",
     setLoading: "setLoading"
 }

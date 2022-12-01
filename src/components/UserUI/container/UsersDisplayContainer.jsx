@@ -25,7 +25,7 @@ const UsersDisplayContainer = () => {
 
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   // useEffect(() => {
   //   getAllProgrammers();

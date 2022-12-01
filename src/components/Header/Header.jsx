@@ -20,9 +20,12 @@ const Header = () => {
   const handleSearch =  () => {
     if (searchText.trim().length > 0) {
         filterProgrammers(searchText) 
+        
     } else {
        alert('search field cannot be empty')
     }
+
+    setSearchText('')
 
   }
     

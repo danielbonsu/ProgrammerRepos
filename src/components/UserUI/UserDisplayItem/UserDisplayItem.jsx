@@ -14,10 +14,11 @@ const UserDisplayItem = ({ userDetails }) => {
     created_at,
     updated_at,
     public_repos,
-    repos_url
+    repos_url,
+    html_url
   } = userDetails;
 
- 
+
   return (
     <div className="programmerCard shadow">
       <Card>
@@ -29,7 +30,7 @@ const UserDisplayItem = ({ userDetails }) => {
           <ListGroup style={{ fontSize: "12px"}} >
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaUserAlt/></span>
-              <span>{`${name} (${login})`}</span>
+              <span>{`${name}`}{"  "} <a target="_blank" href={html_url}>{`${login}@`}</a></span>
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaGlobe/></span>

@@ -3,26 +3,32 @@ import React, {
   useState,
   useContext,
 } from "react";
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import ProgrammersContext from "../../context/ProgrammersReposContext";
 
 import "./Header.scss";
 
 const Header = () => {
-  const { filterProgrammers, clearFiltered } = useContext(
+  const { filterProgrammers, loading } = useContext(
     ProgrammersContext
   );
 
   const [searchText, setSearchText] = useState("");      
 
-useEffect(() => {
-    
+
+  const handleSearch =  () => {
     if (searchText.trim().length > 0) {
         filterProgrammers(searchText) 
     } else {
-        clearFiltered()
+       alert('search field cannot be empty')
     }
+
+  }
+    
+
    
-}, [searchText])
+
  
   
    
@@ -34,15 +40,27 @@ useEffect(() => {
   return (
     <div className="header">
       <div className="content">
-        <h1 className="mb-4">PROGRAMMERS REPOS</h1>
+
         <input
           type="text"
           className="formControl"
-          placeholder="Find A User"
+          placeholder="Enter Name or Email Address"
           value={searchText}
           onChange={handleChange}
         />
+        
       </div>
+      {loading ? (<Button variant="primary" disabled>
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        <span className="visually-hidden">Loading...</span>
+      </Button>) : <Button onClick={handleSearch} variant='primary'>Search</Button> }
+      
     </div>
   );
 };

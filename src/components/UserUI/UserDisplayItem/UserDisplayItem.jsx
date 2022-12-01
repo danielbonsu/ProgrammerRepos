@@ -1,5 +1,6 @@
 import React from "react";
 import { Card} from "react-bootstrap";
+
 import ListGroup from "react-bootstrap/ListGroup";
 import { FaUserAlt, FaGlobe, FaClock, FaEnvelope, FaDochub} from "react-icons/fa";
 import "./UserDisplayItem.scss";
@@ -13,7 +14,10 @@ const UserDisplayItem = ({ userDetails }) => {
     created_at,
     updated_at,
     public_repos,
+    repos_url
   } = userDetails;
+
+ 
   return (
     <div className="programmerCard shadow">
       <Card>
@@ -25,7 +29,7 @@ const UserDisplayItem = ({ userDetails }) => {
           <ListGroup style={{ fontSize: "12px"}} >
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaUserAlt/></span>
-              <span>{login}</span>
+              <span>{`${name} (${login})`}</span>
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaGlobe/></span>
@@ -42,7 +46,7 @@ const UserDisplayItem = ({ userDetails }) => {
 
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaDochub/></span>
-              <span>{public_repos} Repos</span>
+              <span> <a target='_blank' href={repos_url}>{public_repos}</a> Repos</span>
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaClock/></span>

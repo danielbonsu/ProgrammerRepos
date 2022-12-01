@@ -8,18 +8,25 @@ import ProgrammersContext from "../../context/ProgrammersReposContext";
 import "./Header.scss";
 
 const Header = () => {
-  const { allProgrammers,filteredProgrammers, searchProgrammer } = useContext(
+  const { filterProgrammers, clearFiltered } = useContext(
     ProgrammersContext
   );
-  console.log(allProgrammers, 'all');
-  const [searchText, setSearchText] = useState("");
 
-//   useEffect(() => {
-//       if(searchText.length  > 0 ){
-//         searchProgrammer(searchText);
-//       }
+  const [searchText, setSearchText] = useState("");      
+
+useEffect(() => {
+    
+    if (searchText.trim().length > 0) {
+        filterProgrammers(searchText) 
+    } else {
+        clearFiltered()
+    }
    
-//   }, [searchText]);
+}, [searchText])
+ 
+  
+   
+
 
   const handleChange = (e) => {
     setSearchText(e.target.value);

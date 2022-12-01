@@ -44,6 +44,10 @@ const UserDisplayItem = ({ userDetails }) => {
               <span><FaDochub/></span>
               <span>{public_repos} Repos</span>
             </ListGroup.Item>
+            <ListGroup.Item className="d-flex justify-content-between align-items-center">
+              <span><FaClock/></span>
+              <span>{updated_at}</span>
+            </ListGroup.Item>
             
           </ListGroup>
        

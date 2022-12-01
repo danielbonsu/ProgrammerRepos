@@ -24,29 +24,32 @@ const ProgrammerReposState = ({children}) => {
     
 
     // filter users
-    const searchProgrammer = async searchText => {
+    const filterProgrammers = async searchText => {
        
         try {
-            const apiRes = await api(searchText)
-
             dispatch({
                 type: ActionTypes.setFilteredProgrammers,
+                payload: searchText
                
             })
         } catch (error) {
             console.log(error.message)
         }
+    }
 
-    
-        
+    // clear filtered
 
+    const clearFiltered = () => {
+        dispatch({
+            type: ActionTypes.clearFiltered,
+        })
     }
 
 
     // get all programmers
     
     const getAllProgrammers =  async () => {
-        
+        dispatch({type: ActionTypes.setLoading, payload: true})
         const apiRes =  await api()
         const getProgrammersFullDetails = apiRes && apiRes.map(async user => {
             return  await api(`/users/${user.login}`)
@@ -54,18 +57,23 @@ const ProgrammerReposState = ({children}) => {
         })
 
         const fullProgrammersFullDetailsFin = await Promise.all(getProgrammersFullDetails)
+ 
     
         dispatch({
             type: ActionTypes.allProgrammers,
             payload: fullProgrammersFullDetailsFin
         })
+
+        dispatch({type: ActionTypes.setLoading, payload: false})
     }
 
     return <ProgrammersContext.Provider value={{
        allProgrammers: state.allProgrammers,
        filteredProgrammers:state.filteredProgrammers,
-       searchProgrammer,
-       getAllProgrammers
+       loading: state.loading,
+       filterProgrammers,
+       getAllProgrammers,
+       clearFiltered
     }}>
         {children}
     </ProgrammersContext.Provider>

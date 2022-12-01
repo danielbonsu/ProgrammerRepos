@@ -5,14 +5,19 @@ import UsersDisplayContainer from "./components/UserUI/container/UsersDisplayCon
 
 import "./App.css";
 import { Container, Nav } from "react-bootstrap";
-
+import { useEffect } from "react";
 const  App = () => {
+
+  useEffect(() => {
+
+  }, [])
   return (
     <div className="App">
       <ProgrammerReposState>
         <NavbarComponent />
         <Header />
         <UsersDisplayContainer />
+  
       </ProgrammerReposState>
     </div>
   );

@@ -38,7 +38,7 @@ const UserDisplayItem = ({ userDetails }) => {
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaClock/></span>
-              <span>{created_at}</span>
+              <span>Created at {" "} {created_at}</span>
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaEnvelope/></span>
@@ -51,7 +51,7 @@ const UserDisplayItem = ({ userDetails }) => {
             </ListGroup.Item>
             <ListGroup.Item className="d-flex justify-content-between align-items-center">
               <span><FaClock/></span>
-              <span>{updated_at}</span>
+              <span>Updated at {" "} {updated_at}</span>
             </ListGroup.Item>
             
           </ListGroup>
